@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Summary from './components/Summary';
+import Task from './components/Task.js'
 
 function App() {
+
+  const [initialTasks, setInitialTasks] = useState([
+    {
+      _id: "1a",
+      name: "Task1",
+      description: "Do something important",
+      isDone: false                                   
+    },
+    {
+      _id: "2b",
+      name: "Task2",
+      description: "Do something important",
+      isDone: false                                    
+    },
+    {
+      _id: "3c",
+      name: "Task3",
+      description: "Do something important",
+      isDone: true                                    
+    }
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Summary initialTasks={initialTasks}/>
+      {initialTasks.map(singleTask => {
+        return (
+          <Task task={singleTask} 
+          initialTasks={initialTasks} 
+          setInitialTasks={setInitialTasks}/>
+        );
+      })}
     </div>
   );
 }
